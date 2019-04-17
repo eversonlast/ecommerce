@@ -50,10 +50,7 @@ class User extends Model{
 
 				return false;
 			}
-
-
 		}
-
 
 	}
 
@@ -267,6 +264,7 @@ class User extends Model{
 			":iduser"=>$this->getiduser()
 		));
 	}
- } 
+
+} 
 
  ?>
