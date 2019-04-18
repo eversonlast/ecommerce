@@ -75,7 +75,7 @@ class User extends Model{
 
 			$user = new User();
 
-			$data['desperson']= utf8_encode($data['desperson']);
+			$data['desperson']= $data['desperson'];
 
 			$user->setData($data);
 
@@ -85,7 +85,7 @@ class User extends Model{
 
 		}else{
 
-			throw new \Exception("Login errado ou senha inválida");
+			throw new \Exception("Usuário inexistente ou senha inválida");
 		}
 	}
 
