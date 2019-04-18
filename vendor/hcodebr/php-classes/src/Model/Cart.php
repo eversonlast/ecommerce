@@ -219,6 +219,9 @@ class Cart extends Model{
 			return $results;
 		}else{
 
+			$zero= 0;
+			$this->setvlfreight(Cart::formatValueToDecimal($zero));
+
 
 		}
 
