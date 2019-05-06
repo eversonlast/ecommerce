@@ -19,15 +19,12 @@ class Cart extends Model{
 		$cart = new Cart();
 
 		if(isset($_SESSION[Cart::SESSION]) && (int)$_SESSION[Cart::SESSION]['idcart'] > 0){
-
 			$cart->get((int)$_SESSION[Cart::SESSION]['idcart']);
-
 		}else{
 
 			$cart->getFromSessionID();
 
 			if (!(int)$cart->getidcart()>0){
-
 				$data = [
 					'dessessionid'=>session_id()
 				];
@@ -139,14 +136,14 @@ class Cart extends Model{
 		$sql =new Sql();
 
 		$rows = $sql->select("
-							SELECT b.idproduct, b.desproduct, b.vlprice, b.vlwidth, b.vlheight, b.vllength, b.vlweight, b.desurl, COUNT(*) AS nrqtd, SUM(b.vlprice) AS vltotal
-							FROM tb_cartsproducts a INNER JOIN tb_products b 
-							ON a.idproduct = b.idproduct 
-							WHERE a.idcart = :idcart AND a.dtremoved IS NULL 
-							GROUP BY b.idproduct, b.desproduct, b.vlprice, b.vlwidth, b.vlheight, b.vllength, b.vlweight, b.desurl
-							ORDER BY b.desproduct
-						", [
-							':idcart'=>$this->getidcart()
+				SELECT b.idproduct, b.desproduct, b.vlprice, b.vlwidth, b.vlheight, b.vllength, b.vlweight, b.desurl, COUNT(*) AS nrqtd, SUM(b.vlprice) AS vltotal
+				FROM tb_cartsproducts a INNER JOIN tb_products b 
+				ON a.idproduct = b.idproduct 
+				WHERE a.idcart = :idcart AND a.dtremoved IS NULL 
+				GROUP BY b.idproduct, b.desproduct, b.vlprice, b.vlwidth, b.vlheight, b.vllength, b.vlweight, b.desurl
+				ORDER BY b.desproduct
+				", [
+				':idcart'=>$this->getidcart()
 						]);
 
 		return Product::checkList($rows);
@@ -170,6 +167,7 @@ class Cart extends Model{
 			}
 	}
 
+	
 	public function setFreight($nrzipcode){
 
 		$nrzipcode = str_replace('-', '', $nrzipcode);
@@ -233,11 +231,12 @@ class Cart extends Model{
 			return str_replace(',', '.', $value);
 		}
 
+
 	public static function setMsgError($msg){
 
 		$_SESSION[Cart::SESSION_ERROR]= $msg;
 	}
-
+		
 	public static function getMsgError(){
 
 		$msg = (isset($_SESSION[Cart::SESSION_ERROR])) ? $_SESSION[Cart::SESSION_ERROR]: "";
@@ -249,14 +248,14 @@ class Cart extends Model{
 	}
 
 	public static function clearMsgError(){
-
 		$_SESSION[Cart::SESSION_ERROR]= NULL;
 	}
 
+
+	
 	public function updateFreight(){
 
 		if($this->getdeszipcode()!= ''){
-
 			$this->setFreight($this->getdeszipcode());
 		}
 	}
