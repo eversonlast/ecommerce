@@ -37,7 +37,6 @@ $app->post("/admin/users/:iduser/password", function($iduser){
 
 	if ($_POST['despassword']!== $_POST['despassword-confirm']){
 
-
 		User::setError("Confirme corretamente as senhas.");
 		header("Location: /admin/users/$iduser/password");
 		exit;
